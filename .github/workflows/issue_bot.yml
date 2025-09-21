@@ -7,21 +7,42 @@ on:
 jobs:
   comment:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install dependencies
-        run: pip install PyGithub
+        run: |
+          python -m pip install --upgrade pip
+          pip install pygithub
 
       - name: Run bot script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: python bot.py
+        run: |
+          python - << 'EOF'
+          from github import Github
+          import os
+
+          TOKEN = os.getenv("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")
+          REPO_NAME = "AruzCandlr/MonnAboveTest"
+          BOT_MESSAGE = "Monn Above ALL!!!!!!"
+
+          g = Github(TOKEN)
+          repo = g.get_repo(REPO_NAME)
+
+          issues = repo.get_issues(state="open")
+          for issue in issues:
+              already_commented = any(
+                  BOT_MESSAGE in comment.body for comment in issue.get_comments()
+              )
+              if not already_commented:
+                  print(f"💬 Commenting on issue #{issue.number}")
+                  issue.create_comment(BOT_MESSAGE)
+          EOF
