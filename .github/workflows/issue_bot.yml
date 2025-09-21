@@ -36,7 +36,7 @@ jobs:
           REPO_NAME = "AruzCandlr/MonnAboveTest"
           BOT_MESSAGE = "Monn Above ALL!!!!!!"
 
-          g = Github(auth=Auth.Token(TOKEN))
+          g = Github(TOKEN)
           repo = g.get_repo(REPO_NAME)
 
           issues = repo.get_issues(state="open")
