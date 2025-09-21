@@ -3,7 +3,9 @@ name: Issue Bot
 on:
   issues:
     types: [opened]
-
+permissions:
+  issues: write   
+  contents: read
 jobs:
   comment:
     runs-on: ubuntu-latest
@@ -34,7 +36,7 @@ jobs:
           REPO_NAME = "AruzCandlr/MonnAboveTest"
           BOT_MESSAGE = "Monn Above ALL!!!!!!"
 
-          g = Github(TOKEN)
+          g = Github(auth=Auth.Token(TOKEN))
           repo = g.get_repo(REPO_NAME)
 
           issues = repo.get_issues(state="open")
