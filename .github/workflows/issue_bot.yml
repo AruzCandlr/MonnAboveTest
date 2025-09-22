@@ -34,7 +34,7 @@ jobs:
 
           TOKEN = os.getenv("GITHUB_TOKEN")
           REPO_NAME = "AruzCandlr/MonnAboveTest"
-          BOT_MESSAGE = "Monn Above ALL!!!!!!"
+          BOT_MESSAGE = "from action: Monn Above ALL!!!!!!"
 
           g = Github(TOKEN)
           repo = g.get_repo(REPO_NAME)
