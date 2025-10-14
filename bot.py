@@ -6,7 +6,7 @@ from openai import OpenAI
 def main():
     # === Environment Variables ===
     GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    OPENAI_API_KEY = os.getenv("API_KEY")
     REPO_NAME = os.getenv("GITHUB_REPOSITORY")  
     ISSUE_NUMBER = os.getenv("ISSUE_NUMBER")
 
