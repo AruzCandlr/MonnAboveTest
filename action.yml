@@ -33,5 +33,5 @@ runs:
       run: python bot.py
 
 branding:
-  icon: "bot"
+  icon: "activity"
   color: "blue"
