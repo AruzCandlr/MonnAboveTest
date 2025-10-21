@@ -39,7 +39,7 @@ runs:
         ISSUE_NUMBER: ${{ inputs.issue_number || '' }}
         GITHUB_REPOSITORY: ${{ inputs.repo || '' }}
       run: |
-        python bot.py
+        python ${{ github.action_path }}/bot.pybot.py
 
 branding:
   icon: "activity"
