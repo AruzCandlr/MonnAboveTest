@@ -10,8 +10,8 @@ def main():
     REPO_NAME = os.getenv("GITHUB_REPOSITORY")  
     ISSUE_NUMBER = os.getenv("ISSUE_NUMBER")
 
-    if not all([GITHUB_TOKEN, OPENAI_API_KEY, REPO_NAME, ISSUE_NUMBER]):
-        raise EnvironmentError("no key lmao")
+    # if not all([GITHUB_TOKEN, OPENAI_API_KEY, REPO_NAME, ISSUE_NUMBER]):
+    #     raise EnvironmentError("no key lmao")
 
     # === Initialize Clients ===
     gh = Github(GITHUB_TOKEN)
