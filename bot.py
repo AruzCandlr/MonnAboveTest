@@ -1,12 +1,12 @@
 # bot.py
 import os
 from github import Github
-from openai import OpenAI
+from google import genai
 
 def main():
     # === Environment Variables ===
     GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-    OPENAI_API_KEY = os.getenv("API_KEY")
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     REPO_NAME = os.getenv("GITHUB_REPOSITORY")  
     ISSUE_NUMBER = os.getenv("ISSUE_NUMBER")
 
@@ -15,7 +15,7 @@ def main():
 
     # === Initialize Clients ===
     gh = Github(GITHUB_TOKEN)
-    client = OpenAI(api_key=OPENAI_API_KEY)
+    client = genai.Client()
     repo = gh.get_repo(REPO_NAME)
     issue = repo.get_issue(int(ISSUE_NUMBER))
 
@@ -24,22 +24,11 @@ def main():
         f"what is mahidol university?"
     )
 
-    # === Generate AI response ===
-    # print(f" Generating response for issue #{issue.number}...")
-    # completion = client.chat.completions.create(
-    #     model="gpt-4o-mini",
-    #     messages=[
-    #         {"role": "system", "content": "You are a helpful GitHub assistant that comments on issues."},
-    #         {"role": "user", "content": prompt},
-    #     ],
-    #     max_tokens=150,
-    # )
-
-    # ai_message = completion.choices[0].message.content.strip()
-    # bot_comment = f" ai gen: {ai_message}"
-
+    response = client.models.generate_content(
+    model="gemini-2.5-flash", contents=prompt)
+    print(response.text)
     # === Post Comment ===
-    bot_comment = "mock comment"
+    bot_comment = response.text
     issue.create_comment(bot_comment)
     print(f" Commented on issue #{issue.number}")
 
