@@ -25,20 +25,21 @@ def main():
     )
 
     # === Generate AI response ===
-    print(f" Generating response for issue #{issue.number}...")
-    completion = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "You are a helpful GitHub assistant that comments on issues."},
-            {"role": "user", "content": prompt},
-        ],
-        max_tokens=150,
-    )
+    # print(f" Generating response for issue #{issue.number}...")
+    # completion = client.chat.completions.create(
+    #     model="gpt-4o-mini",
+    #     messages=[
+    #         {"role": "system", "content": "You are a helpful GitHub assistant that comments on issues."},
+    #         {"role": "user", "content": prompt},
+    #     ],
+    #     max_tokens=150,
+    # )
 
-    ai_message = completion.choices[0].message.content.strip()
-    bot_comment = f" ai gen: {ai_message}"
+    # ai_message = completion.choices[0].message.content.strip()
+    # bot_comment = f" ai gen: {ai_message}"
 
     # === Post Comment ===
+    bot_comment = "mock comment"
     issue.create_comment(bot_comment)
     print(f" Commented on issue #{issue.number}")
 
