@@ -35,7 +35,7 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
-        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+        GEMINI_API_KEY: ${{ inputs.openai_api_key }}
         ISSUE_NUMBER: ${{ inputs.issue_number || '' }}
         GITHUB_REPOSITORY: ${{ inputs.repo || '' }}
       run: |
