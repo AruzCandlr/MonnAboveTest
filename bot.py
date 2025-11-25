@@ -28,7 +28,8 @@ def main():
     model="gemini-2.5-flash", contents=prompt)
     print(response.text)
     # === Post Comment ===
-    bot_comment = response.text
+    # bot_comment = response.text
+    bot_comment = "“This pull request introduces a GitHub action that uses the microsoft/winget-create tool to automatically submit new stable releases of ollama to the official microsoft/winget-pkgs community manifest repository.”"
     issue.create_comment(bot_comment)
     print(f" Commented on issue #{issue.number}")
 
