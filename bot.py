@@ -8,7 +8,7 @@ def main():
     GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     REPO_NAME = os.getenv("GITHUB_REPOSITORY")  
-    ISSUE_NUMBER = os.getenv("ISSUE_NUMBER")
+    PR_NUMBER = os.getenv("PR_NUMBER")
 
     # if not all([GITHUB_TOKEN, OPENAI_API_KEY, REPO_NAME, ISSUE_NUMBER]):
     #     raise EnvironmentError("no key lmao")
@@ -17,7 +17,7 @@ def main():
     gh = Github(GITHUB_TOKEN)
     client = genai.Client()
     repo = gh.get_repo(REPO_NAME)
-    issue = repo.get_issue(int(ISSUE_NUMBER))
+    PR = repo.get_issue(int(PR_NUMBER))
 
     # === Prepare AI prompt ===
     prompt = (
@@ -27,6 +27,7 @@ def main():
     response = client.models.generate_content(
     model="gemini-2.5-flash", contents=prompt)
     print(response.text)
+    print(PR)
     # === Post Comment ===
     # bot_comment = response.text
     bot_comment = "“This pull request introduces a GitHub action that uses the microsoft/winget-create tool to automatically submit new stable releases of ollama to the official microsoft/winget-pkgs community manifest repository.”"
