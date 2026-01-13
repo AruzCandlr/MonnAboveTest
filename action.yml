@@ -8,8 +8,8 @@ inputs:
   github_token:
     description: "GitHub token (pass in via secrets, default GITHUB_TOKEN)"
     required: true
-  issue_number:
-    description: "Issue number to comment on"
+  pr_number:
+    description: "Pull Request number to comment on"
     required: false
   repo:
     description: "Repository in owner/repo format"
@@ -36,7 +36,7 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         GEMINI_API_KEY: ${{ inputs.openai_api_key }}
-        ISSUE_NUMBER: ${{ inputs.issue_number || '' }}
+        PR_NUMBER: ${{ pr_number || '' }}
         GITHUB_REPOSITORY: ${{ inputs.repo || '' }}
       run: |
         python ${{ github.action_path }}/bot.py
