@@ -1,5 +1,5 @@
 name: "JaoMonnBot"
-description: "Comment on a newly opened issue with an OpenAI generated response."
+description: "Comment on a newly opened pr with an OpenAI generated response."
 author: "AruzCandlr"
 inputs:
   openai_api_key:
