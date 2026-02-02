@@ -29,7 +29,7 @@ runs:
       shell: bash
       run: |
         python -m pip install --upgrade pip
-        pip install -q -U google-genai pygithub torch torchvision torchaudio \ --index-url https://download.pytorch.org/whl/cpu sentence-transformers
+        pip install -q -U google-genai pygithub torch sentence-transformers
 
     - name: Run bot
       shell: bash
