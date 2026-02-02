@@ -2,7 +2,7 @@
 import os
 from github import Github
 from google import genai
-
+from sentence_transformers import SentenceTransformer
 def main():
     # === Environment Variables ===
     GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
@@ -14,30 +14,20 @@ def main():
     #     raise EnvironmentError("no key lmao")
 
     # === Initialize Clients ===
-    gh = Github(GITHUB_TOKEN)
-    client = genai.Client()
-    repo = gh.get_repo(REPO_NAME)
-    issue = repo.get_issue(int(ISSUE_NUMBER))
-
-    # === Prepare AI prompt ===
-    prompt = (
-        f"what is mahidol university?"
-    )
-
-    response = client.models.generate_content(
-    model="gemini-2.5-flash", contents=prompt)
-    print(response.text)
-    # === Post Comment ===
+   
     model = SentenceTransformer("all-MiniLM-L6-v2")
 
+    texts = [
+    "GitHub Actions is great for CI",
+    "Sentence transformers create embeddings"
+    ]
+    
     embeddings = model.encode(
-        ["This is a sentence", "This is another one"],
+        texts,
         normalize_embeddings=True
     )
-    # bot_comment = response.text
-    bot_comment = "“This pull request introduces a GitHub action that uses the microsoft/winget-create tool to automatically submit new stable releases of ollama to the official microsoft/winget-pkgs community manifest repository.”"
-    issue.create_comment(bot_comment)
-    print(f" Commented on issue #{issue.number}")
+
+    print(len(embeddings), len(embeddings[0]))
 
     
 if __name__ == "__main__":
